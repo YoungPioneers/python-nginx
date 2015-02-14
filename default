@@ -1,0 +1,38 @@
+user www;
+
+upstream http {
+    # hehe
+    server 127.0.0.1:8000 weight=3;
+    #server 127.0.0.1:8001 weight=3;
+    server 127.0.0.1:8002 weight=3;
+}
+
+http {
+	server {
+	    listen 80 default_server;
+	    listen [::]:80 default_server ipv6only=on;
+	    root /usr/share/nginx/html;
+	    index index.html index.htm index.php;
+	    server_name localhost;
+
+	    location / {
+		try_files $uri $uri/ =404;
+	    }
+
+	    location /doc/ {
+		alias /usr/share/doc/;
+		strange string;
+	    }
+
+	    error_page 404 /404.html;
+
+	    location = /50x.html {
+		root /usr/share/nginx/html;
+	    }
+
+	    fastcgi_pass unix:/var/run/php5-fpm.sock;
+	    fastcgi_index index.php;
+	    fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+	    include fastcgi_params;
+	}
+}
