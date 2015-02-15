@@ -3,5 +3,5 @@
 ## Requirement
 
 ```
-pip install fabric
+
 ```
