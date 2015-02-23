@@ -1,7 +1,3 @@
 # Nginx 配置文件解析器(Python)
 
-## Requirement
-
-```
-
-```
+## 用法详见demo.py
